@@ -101,6 +101,7 @@ class Cityscapes(VisionDataset):
         # Applies preprocessing when accessing the image
         if self.transform is not None:
             image = self.transform(image)
+            label = self.transform(label)
 
         return image, label
 
