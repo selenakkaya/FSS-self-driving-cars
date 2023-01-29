@@ -27,6 +27,15 @@ colors = [
   [0, 0, 230],
   [119, 11, 32]
 ]
+def decode_segmap(image):
+    # assuming the input image has shape (C, H, W) where C is the number of channels
+    label_colours = dict(zip(range(19), colors))
+    output = image.clone()
+    for l in range(19):
+        mask = (image[0] == l)
+        for c in range(3):
+            output[c][mask] = label_colours[l][c]
+    return output
 
 
 def display_prediction(net, dataset, random=False):    
@@ -45,6 +54,7 @@ def display_prediction(net, dataset, random=False):
 
     fig.add_subplot(1, 3, 2)
     l_ = l[0].squeeze()
+    l_ = decode_segmap(l_)
     plt.imshow(l_)
     plt.axis('off')
 
@@ -57,6 +67,7 @@ def display_prediction(net, dataset, random=False):
       out = out.cpu().squeeze()
 
       fig.add_subplot(1, 3, 3)
+      out = decode_segmap(out)
       plt.imshow(out)
       plt.axis('off')
     plt.show()

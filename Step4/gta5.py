@@ -71,6 +71,7 @@ class GTA5(VisionDataset):
           label = label.type(torch.LongTensor)
           label = self.target_transform(label)
           label = self.label_remapping(label)
+          label = label[0].squeeze()
 
         return image, label
 
