@@ -1,3 +1,4 @@
+
 from torchvision.datasets import VisionDataset
 
 from PIL import Image
@@ -10,6 +11,8 @@ from torch import from_numpy
 import matplotlib.pyplot as plt
 from torchvision import transforms
 import torch
+from sklearn.preprocessing import LabelEncoder
+
 
 eval_classes = [7, 8, 11, 12, 13, 17, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 31, 32, 33]
 
@@ -53,7 +56,6 @@ class GTA5(VisionDataset):
         __getitem__ should access an element through its index
         Args:
             index (int): Index
-
         Returns:
             tuple: (sample, target) where target is class_index of the target class.
         '''
@@ -70,10 +72,20 @@ class GTA5(VisionDataset):
           label = transforms.ToTensor()(label)
           label = label.type(torch.LongTensor)
           label = self.target_transform(label)
-          label = self.label_remapping(label)
-          label = label[0].squeeze()
+          #label = self.label_remapping(label)
+          #label = label[0].squeeze()
 
-        return image, label
+          #Encode labels to 0, 1, 2, 3, ... but multi dim array so need to flatten, encode and reshape
+          labelencoder = LabelEncoder()
+          n, h, w = label.shape  
+          mask_dataset_reshaped = label.reshape(-1,1)
+          mask_dataset_reshaped_encoded = labelencoder.fit_transform(mask_dataset_reshaped)
+          mask_dataset_encoded = mask_dataset_reshaped_encoded.reshape(n, h, w)
+
+          print(np.unique(mask_dataset_encoded))
+     
+
+        return image, mask_dataset_encoded
 
     def __len__(self):
         '''
