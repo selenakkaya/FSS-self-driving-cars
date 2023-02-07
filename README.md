@@ -5,6 +5,7 @@
 **The goal of federated learning is to allow a group of participants to collaboratively train a machine learning model without having to share their data**. This is particularly useful in situations where the data is sensitive or private, and sharing it would be inappropriate.
 
 In **semantic segmentation**, the task is to assign a label to each pixel in an image. This is a challenging problem, as the labels for different pixels may vary widely and depend on context. 
+![image](https://user-images.githubusercontent.com/50169967/217383674-a27d9f8a-09e0-4bed-aebf-ff3b49ff2de5.png)
 
 To achieve accurate semantic segmentation, a large amount of labeled training data is required. **Federated semantic segmentation** allows multiple participants with different data to train a single model, which can lead to better performance than if each participant were to train their own model independently.
 
