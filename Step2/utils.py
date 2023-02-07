@@ -70,7 +70,7 @@ def display_prediction(net, dataset, random=False):
     net.eval()
     with torch.no_grad():
       i = i.to(DEVICE)
-      out = net(i)['out']
+      out = net(i)
       out = torch.softmax(out, dim=1)
       out = torch.argmax(out, dim=1)
       out = out.cpu().squeeze()
