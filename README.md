@@ -1,5 +1,5 @@
 ## Federated Semantic Segmentation
-Advanced Machine Learning - Polito
+### Advanced Machine Learning - Polito
 **Federated semantic segmentation** is a technique that **allows multiple participants, each with their own data, to train a semantic segmentation model together without sharing their data with one another.** This is done by **training a global model on each participant's local data and then aggregating the resulting models to create a final, global model.**
 
 **The goal of federated learning is to allow a group of participants to collaboratively train a machine learning model without having to share their data**. This is particularly useful in situations where the data is sensitive or private, and sharing it would be inappropriate.
